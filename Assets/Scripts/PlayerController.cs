@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    private float speed = 15f;
+    public float speed = 15f;
     private float verticalInput;
+    private float horizontalInput;
     private float rotationSpeed = 200f;
     private float MouseXInput;
 
@@ -25,27 +26,32 @@ public class PlayerController : MonoBehaviour
     {
         // El movimiento funciona con W y S para avanzar y para girar con el raton
         verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput); 
+        transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
+
+        horizontalInput = Input.GetAxis("Horizontal");
+        transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
 
         MouseXInput = Input.GetAxis("Mouse X");
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * MouseXInput);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+
+
+
+        if (Input.GetKeyDown(KeyCode.Space) && itsOntheGround == true)
         {
             RigidBodyComponent.AddForce(Vector3.up * 20000);
+            itsOntheGround = false;
         }
+
+        
+
     }
 
-
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
             itsOntheGround = true;
-        }
-        else
-        {
-            itsOntheGround = false;
         }
     }
 }

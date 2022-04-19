@@ -13,18 +13,21 @@ public class Weapons : MonoBehaviour
         EnemyScript = FindObjectOfType<Enemy>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            
             EnemyScript.EnemyHP -= Damage;
             Debug.Log($"Enemy:{EnemyScript.EnemyHP}");
+            
+            if( EnemyScript.EnemyHP <= 0f)
+            {
+                EnemyScript.DestroyEnemy();
+            }
         }
     }
 }

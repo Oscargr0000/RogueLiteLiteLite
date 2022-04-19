@@ -10,16 +10,14 @@ public class Enemy : MonoBehaviour
     public float Speed;
     
     private GameManager GameMangerScript;
-    private Rigidbody RigidBodyComponent;
+
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.Find("Player");
 
         GameMangerScript = FindObjectOfType<GameManager>();
-        //RigidBodyComponent.constraints = RigidbodyConstraints.FreezeRotationX;
-        //RigidBodyComponent.constraints = RigidbodyConstraints.FreezeRotationZ;
-        //RigidBodyComponent.constraints = RigidbodyConstraints.FreezeRotationY;
+        
 
     }
 
@@ -32,6 +30,11 @@ public class Enemy : MonoBehaviour
             transform.LookAt(Player.transform);
         }
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            DestroyEnemy();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -41,5 +44,12 @@ public class Enemy : MonoBehaviour
             GameMangerScript.HpPlayer -= Damage;
             Debug.Log($"Player:{GameMangerScript.HpPlayer}");
         }
+    }
+
+    public void DestroyEnemy()
+    {
+        Destroy(gameObject);
+        //Partoculas
+        //sonido 
     }
 }
