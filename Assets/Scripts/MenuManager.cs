@@ -19,28 +19,27 @@ public class MenuManager : MonoBehaviour
         GameManagerScript = FindObjectOfType<GameManager>();
     }
 
-    private void Update() //Arreglar
-    {
-        if (SpawnManagerScript.EnemyLeft == 0 && GameManagerScript.RoundNum == 5)
-        {
-            PowerUpsCanvas.SetActive(true);
-        }
-        else
-        {
-            PowerUpsCanvas.SetActive(false);
-        }
-    }
-
 
     //PowerUps Para la UI
-    public void PowerTest1()
+    public void Damage()
     {
         WeaponsScript.Damage += 10f;
         GameManagerScript.RoundNum = 0;
     }
-    public void PowerUp2Test()
+    public void Speed()
     {
-        PlayerControllerScript.speed += 10;
+        PlayerControllerScript.speed += 5;
+        GameManagerScript.RoundNum = 0;
+    }
+
+    public void Shield()
+    {
+
+    }
+
+    public void Jump()
+    {
+        PlayerControllerScript.JumpMax++;
         GameManagerScript.RoundNum = 0;
     }
 }

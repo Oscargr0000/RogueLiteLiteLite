@@ -41,8 +41,6 @@ public class SpawnManager : MonoBehaviour
             GameManagerScrpipt.RoundNum++;
             SpawnEnemyWave(totalEnemy);
         }
-        
-        
     }
 
     Vector3 RandomSpawnPos()

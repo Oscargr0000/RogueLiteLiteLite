@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
 
     public bool itsOntheGround;
 
+    private int Jumps;
+    public int JumpMax = 2;
+
     private Rigidbody RigidBodyComponent;
 
     // Start is called before the first frame update
@@ -21,10 +24,12 @@ public class PlayerController : MonoBehaviour
         RigidBodyComponent = GetComponent<Rigidbody>();
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
-        // El movimiento funciona con W y S para avanzar y para girar con el raton
+        // El movimiento funciona con WASD para avanzar y para girar con el raton
         verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
 
@@ -34,24 +39,23 @@ public class PlayerController : MonoBehaviour
         MouseXInput = Input.GetAxis("Mouse X");
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * MouseXInput);
 
+         
 
-
-
-        if (Input.GetKeyDown(KeyCode.Space) && itsOntheGround == true)
+        // Salto + Contador de saltos realizados
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps <= 0)
         {
             RigidBodyComponent.AddForce(Vector3.up * 20000);
-            itsOntheGround = false;
+            Jumps++;
         }
-
-        
-
     }
 
+
+    // Resetea la cantidad de saltos realizados al tocar el suelo
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            itsOntheGround = true;
+            Jumps = 0;
         }
     }
 }
