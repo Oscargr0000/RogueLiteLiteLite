@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool itsOntheGround;
 
     private int Jumps;
-    public int JumpMax = 2;
+    public int JumpMax = 1;
 
     private Rigidbody RigidBodyComponent;
 
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
          
 
         // Salto + Contador de saltos realizados
-        if (Input.GetKeyDown(KeyCode.Space) && Jumps <= 0)
+        if (Input.GetKeyDown(KeyCode.Space) && Jumps <= JumpMax)
         {
             RigidBodyComponent.AddForce(Vector3.up * 20000);
             Jumps++;

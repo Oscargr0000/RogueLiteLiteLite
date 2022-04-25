@@ -36,6 +36,16 @@ public class GameManager : MonoBehaviour
         {
             SpawnManagerScript.enabled = true;
         }
+
+        if (RoundNum >= 5 && SpawnManagerScript.EnemyLeft <= 0) 
+        {
+            MenuManagerScript.PowerUpsCanvas.SetActive(true);
+        }
+        else
+        {
+            MenuManagerScript.PowerUpsCanvas.SetActive(false);
+        }
+
     }
 
     

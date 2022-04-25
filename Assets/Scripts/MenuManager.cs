@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MenuManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class MenuManager : MonoBehaviour
         WeaponsScript = FindObjectOfType<Weapons>();
         PlayerControllerScript = FindObjectOfType<PlayerController>();
         GameManagerScript = FindObjectOfType<GameManager>();
+        SpawnManagerScript = FindObjectOfType<SpawnManager>();
+        PowerUpsCanvas.SetActive(false);
     }
 
 
@@ -25,11 +28,13 @@ public class MenuManager : MonoBehaviour
     {
         WeaponsScript.Damage += 10f;
         GameManagerScript.RoundNum = 0;
+        SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
     }
     public void Speed()
     {
         PlayerControllerScript.speed += 5;
         GameManagerScript.RoundNum = 0;
+        SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
     }
 
     public void Shield()
@@ -39,7 +44,8 @@ public class MenuManager : MonoBehaviour
 
     public void Jump()
     {
-        PlayerControllerScript.JumpMax++;
+        PlayerControllerScript.JumpMax =+ 1;
         GameManagerScript.RoundNum = 0;
+        SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
     }
 }
