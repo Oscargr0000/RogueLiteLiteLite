@@ -10,7 +10,7 @@ public class Weapons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemyScript = FindObjectOfType<Enemy>();
+        
     }
 
 
@@ -20,7 +20,9 @@ public class Weapons : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            
+            EnemyScript = other.gameObject.GetComponent<Enemy>();
+
+
             EnemyScript.EnemyHP -= Damage;
             Debug.Log($"Enemy:{EnemyScript.EnemyHP}");
             

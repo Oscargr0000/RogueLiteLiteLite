@@ -7,7 +7,11 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject[] Enemies;
     private int RandomNum;
+    public int TotalRounds = 1;
     private float RandomSpawn;
+    public bool ShowPowerUps;
+
+    
 
     public int totalEnemy = 1;
     public int EnemyLeft;
@@ -28,6 +32,7 @@ public class SpawnManager : MonoBehaviour
         RandomNum = Random.Range(0, 2);
 
         SpawnEnemyWave(totalEnemy);
+        
 
     }
 
@@ -37,9 +42,15 @@ public class SpawnManager : MonoBehaviour
         EnemyLeft = FindObjectsOfType<Enemy>().Length;
         if (EnemyLeft <= 0)
         {
+            MostrarPowerUps();
+            while (ShowPowerUps)
+            {
+                return;
+            }
+
             totalEnemy++;
-            GameManagerScrpipt.RoundNum++;
             SpawnEnemyWave(totalEnemy);
+            
         }
     }
 
@@ -61,7 +72,21 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < enemyInMap; i++)
         {
             SpawnEnemies();
-            
+            Debug.Log(TotalRounds);
+        }
+        TotalRounds++;
+    }
+
+
+    private void MostrarPowerUps()
+    {
+        if (TotalRounds % 5 == 0)
+        {
+            ShowPowerUps=  true;
+        }
+        else
+        {
+            ShowPowerUps = false;
         }
     }
 

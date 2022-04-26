@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public float HpPlayer;
     public bool GameOver;
     public int RoundNum = 1;
-
+    
 
     private Enemy EnemyScript;
     private SpawnManager SpawnManagerScript;
@@ -28,23 +28,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (RoundNum >= 5)
-        {
-            SpawnManagerScript.enabled = false;
-        }
-        else
-        {
-            SpawnManagerScript.enabled = true;
-        }
-
-        if (RoundNum >= 5 && SpawnManagerScript.EnemyLeft <= 0) 
-        {
-            MenuManagerScript.PowerUpsCanvas.SetActive(true);
-        }
-        else
-        {
-            MenuManagerScript.PowerUpsCanvas.SetActive(false);
-        }
+        
+        
 
     }
 

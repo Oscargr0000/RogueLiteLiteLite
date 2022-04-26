@@ -22,19 +22,28 @@ public class MenuManager : MonoBehaviour
         PowerUpsCanvas.SetActive(false);
     }
 
+    private void Update()
+    {
+        if(SpawnManagerScript.ShowPowerUps == true)
+        {
+            PowerUpsCanvas.SetActive(true);
+        }
+        else
+        {
+            PowerUpsCanvas.SetActive(false);
+        }
+    }
 
     //PowerUps Para la UI
     public void Damage()
     {
         WeaponsScript.Damage += 10f;
-        GameManagerScript.RoundNum = 0;
-        SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
+        GeneralDataPower();
     }
     public void Speed()
     {
-        PlayerControllerScript.speed += 5;
-        GameManagerScript.RoundNum = 0;
-        SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
+        PlayerControllerScript.speed += 2;
+        GeneralDataPower();
     }
 
     public void Shield()
@@ -45,7 +54,16 @@ public class MenuManager : MonoBehaviour
     public void Jump()
     {
         PlayerControllerScript.JumpMax =+ 1;
+        GeneralDataPower();
+    }
+
+
+
+
+    private void GeneralDataPower()
+    {
         GameManagerScript.RoundNum = 0;
         SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
+        SpawnManagerScript.ShowPowerUps = false;
     }
 }
