@@ -8,11 +8,17 @@ public class AnimatorController : MonoBehaviour
 
     public Animator SwordAnimator;
 
+    public GameObject HondaSword;
+    public GameObject Player;
+
+    private MenuManager MenuManagerScript;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        MenuManagerScript = FindObjectOfType<MenuManager>();
+        //HondaSword.SetActive(false);
     }
 
     // Update is called once per frame
@@ -22,6 +28,12 @@ public class AnimatorController : MonoBehaviour
         {
             SwordAnimator.SetTrigger("Attack");
             print("Click");
+
+            if(MenuManagerScript.HondaAttack == true)
+            {
+                //HondaSword.SetActive(true);
+                HondaSword.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.z, Player.transform.position.z + 1);
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ public class MenuManager : MonoBehaviour
     private GameManager GameManagerScript;
     private SpawnManager SpawnManagerScript;
 
+    public bool HondaAttack = true;
+
     public GameObject PowerUpsCanvas;
 
     // Start is called before the first frame update
@@ -55,6 +57,11 @@ public class MenuManager : MonoBehaviour
     {
         PlayerControllerScript.JumpMax =+ 1;
         GeneralDataPower();
+    }
+
+    public void EffectSword()
+    {
+        HondaAttack = true;
     }
 
 
