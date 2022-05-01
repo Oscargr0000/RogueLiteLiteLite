@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody RigidBodyComponent;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,8 @@ public class PlayerController : MonoBehaviour
             RigidBodyComponent.AddForce(Vector3.up * 20000);
             Jumps++;
         }
+
+        
     }
 
 
