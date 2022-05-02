@@ -1312,7 +1312,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222810344}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 91faa7796693931458d26eebd4916454, type: 2}
   m_CullingMode: 0
@@ -1382,7 +1382,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261592235}
-  m_LocalRotation: {x: 0.15018845, y: 0.000000021119185, z: -0.000000003208247, w: 0.9886574}
+  m_LocalRotation: {x: 0.15018843, y: -0.000000015132223, z: 0.0000000022987585, w: 0.9886574}
   m_LocalPosition: {x: 0, y: 5.41, z: -5.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6258,7 +6258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ab7e0ec3854df419fb9e01416fddea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HondaAttack: 0
+  HondaAttack: 1
   PowerUpsCanvas: {fileID: 135198885}
 --- !u!1001 &1839967851
 PrefabInstance:
@@ -6359,6 +6359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwordAnimator: {fileID: 1714962292}
+  HondaAttack: {fileID: 222810346}
   HondaSword: {fileID: 222810344}
   Player: {fileID: 1913965122}
 --- !u!4 &1878020492
@@ -6507,6 +6508,7 @@ MonoBehaviour:
   speed: 15
   itsOntheGround: 0
   JumpMax: 0
+  HP: 100
 --- !u!136 &1913965124
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6871,7 +6873,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024756254}
-  m_LocalRotation: {x: 0.15018845, y: 0.000000021119185, z: -0.000000003208247, w: 0.9886574}
+  m_LocalRotation: {x: 0.15018843, y: -0.000000015132223, z: 0.0000000022987585, w: 0.9886574}
   m_LocalPosition: {x: 0, y: 5.41, z: -5.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

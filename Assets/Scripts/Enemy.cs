@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float Speed;
     
     private GameManager GameMangerScript;
+    private PlayerController PlayerControllerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,8 @@ public class Enemy : MonoBehaviour
         Player = GameObject.Find("Player");
 
         GameMangerScript = FindObjectOfType<GameManager>();
-        
+        PlayerControllerScript = FindObjectOfType<PlayerController>();
+
 
     }
 
@@ -41,8 +43,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameMangerScript.HpPlayer -= Damage;
-            Debug.Log($"Player:{GameMangerScript.HpPlayer}");
+            PlayerControllerScript.HP -= Damage;
+            Debug.Log($"Player:{PlayerControllerScript.HP}");
         }
     }
 

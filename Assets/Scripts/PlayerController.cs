@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private int Jumps;
     public int JumpMax = 1;
 
+    public float HP;
+
     private Rigidbody RigidBodyComponent;
 
     
