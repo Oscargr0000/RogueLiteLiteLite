@@ -33,7 +33,7 @@ public class AnimatorController : MonoBehaviour
 
             if (MenuManagerScript.HondaAttack == true)
             {
-                HondaSword.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z);
+                HondaSword.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 1);
                 HondaSword.transform.rotation = Quaternion.Euler(Player.transform.rotation.x, Player.transform.rotation.y, Player.transform.rotation.z);
                 //HondaSword.SetActive(true);
                 HondaAttack.SetTrigger("Activate");

@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
     public bool HondaAttack = true;
 
     public GameObject PowerUpsCanvas;
+    public GameObject PauseGameCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class MenuManager : MonoBehaviour
         GameManagerScript = FindObjectOfType<GameManager>();
         SpawnManagerScript = FindObjectOfType<SpawnManager>();
         PowerUpsCanvas.SetActive(false);
+        PauseGameCanvas.SetActive(false);
     }
 
     private void Update()
@@ -33,6 +35,11 @@ public class MenuManager : MonoBehaviour
         else
         {
             PowerUpsCanvas.SetActive(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMenu();
         }
     }
 
@@ -62,6 +69,19 @@ public class MenuManager : MonoBehaviour
     public void EffectSword()
     {
         HondaAttack = true;
+    }
+
+
+    public void PauseMenu()
+    {
+        PauseGameCanvas.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ReturnPlay()
+    {
+        PauseGameCanvas.SetActive(false);
+        Time.timeScale = 1;
     }
 
 
