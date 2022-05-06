@@ -3974,7 +3974,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5ea31e0b04d8144939fc4a644c49d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpPlayer: 100
   GameOver: 0
   RoundNum: 1
 --- !u!4 &913921197

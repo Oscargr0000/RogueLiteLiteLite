@@ -52,12 +52,13 @@ public class Enemy : MonoBehaviour
 
     public void DestroyEnemy()
     {
-        Destroy(gameObject);
+        
         HPprobability = Random.Range(1, 10);
         if(HPprobability == 1)
         {
             Instantiate(HpRecover, transform.position, transform.rotation);
         }
+        Destroy(gameObject);
         //Partoculas
         //sonido 
     }

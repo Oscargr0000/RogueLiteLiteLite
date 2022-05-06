@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float HpPlayer;
     public bool GameOver;
     public int RoundNum = 1;
 

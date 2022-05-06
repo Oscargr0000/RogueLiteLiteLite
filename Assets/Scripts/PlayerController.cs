@@ -64,4 +64,14 @@ public class PlayerController : MonoBehaviour
             Jumps = 0;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Heal"))
+        {
+            HP += 10;
+            Debug.Log(HP);
+            Destroy(other.gameObject);
+        }
+    }
 }
