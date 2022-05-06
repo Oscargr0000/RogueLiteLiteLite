@@ -56,14 +56,15 @@ public class SpawnManager : MonoBehaviour
 
     Vector3 RandomSpawnPos()
     {
-        RandomX = Random.Range(5, -5);
-        RandomZ = Random.Range(5, -5);
+        RandomX = Random.Range(7.5f, 31.2f );
+        RandomZ = Random.Range(1.7f, 28.5f);
 
        return new Vector3(RandomX, 1, RandomZ);
     }
 
     void SpawnEnemies()
     {
+        RandomNum = Random.Range(0, Enemies.Length);
         Instantiate(Enemies[RandomNum], RandomSpawnPos(), Enemies[RandomNum].transform.rotation);
     }
 

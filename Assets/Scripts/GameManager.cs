@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public float HpPlayer;
     public bool GameOver;
     public int RoundNum = 1;
-    
 
     private Enemy EnemyScript;
     private SpawnManager SpawnManagerScript;

@@ -8,7 +8,9 @@ public class Enemy : MonoBehaviour
     public float EnemyHP;
     public float Damage;
     public float Speed;
-    
+    public int HPprobability;
+    public GameObject HpRecover;
+
     private GameManager GameMangerScript;
     private PlayerController PlayerControllerScript;
 
@@ -51,6 +53,11 @@ public class Enemy : MonoBehaviour
     public void DestroyEnemy()
     {
         Destroy(gameObject);
+        HPprobability = Random.Range(1, 10);
+        if(HPprobability == 1)
+        {
+            Instantiate(HpRecover, transform.position, transform.rotation);
+        }
         //Partoculas
         //sonido 
     }

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 15f;
     private float verticalInput;
     private float horizontalInput;
-    private float rotationSpeed = 200f;
+    private float rotationSpeed = 400f;
     private float MouseXInput;
 
     public bool itsOntheGround;
