@@ -7,14 +7,6 @@ public class Weapons : MonoBehaviour
     public float Damage;
     private Enemy EnemyScript;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-
-
 
     private void OnTriggerEnter(Collider other)
     {

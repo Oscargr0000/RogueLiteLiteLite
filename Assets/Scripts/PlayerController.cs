@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     public float speed = 15f;
+    private float RunningSpeed = 5f;
     private float verticalInput;
     private float horizontalInput;
     private float rotationSpeed = 400f;
@@ -52,6 +53,14 @@ public class PlayerController : MonoBehaviour
             Jumps++;
         }
 
+        //Running
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed += RunningSpeed;
+        }else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed -= RunningSpeed;
+        }
         
     }
 
@@ -69,7 +78,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Heal"))
         {
-            HP += 10;
+            HP += 5;
             Debug.Log(HP);
             Destroy(other.gameObject);
         }

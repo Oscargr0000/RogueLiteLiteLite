@@ -35,6 +35,8 @@ public class Enemy : MonoBehaviour
         }
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
 
+
+        //Quitar esta linea de codigo
         if (Input.GetKeyDown(KeyCode.J))
         {
             DestroyEnemy();

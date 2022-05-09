@@ -9,11 +9,19 @@ public class MenuManager : MonoBehaviour
     private PlayerController PlayerControllerScript;
     private GameManager GameManagerScript;
     private SpawnManager SpawnManagerScript;
+    private FollowPlayer FollowPlayerScript;
+
+    private List<int> PickCardRandom;
 
     public bool HondaAttack = true;
 
     public GameObject PowerUpsCanvas;
     public GameObject PauseGameCanvas;
+
+
+    //POWERUPS
+    public GameObject[] PowerUpsButtons;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +32,7 @@ public class MenuManager : MonoBehaviour
         SpawnManagerScript = FindObjectOfType<SpawnManager>();
         PowerUpsCanvas.SetActive(false);
         PauseGameCanvas.SetActive(false);
+        FollowPlayerScript.ShieldActive = false;
     }
 
     private void Update()
@@ -31,6 +40,7 @@ public class MenuManager : MonoBehaviour
         if(SpawnManagerScript.ShowPowerUps == true)
         {
             PowerUpsCanvas.SetActive(true);
+            //ActivateButtons(); 
         }
         else
         {
@@ -57,7 +67,8 @@ public class MenuManager : MonoBehaviour
 
     public void Shield()
     {
-
+        FollowPlayerScript.ShieldActive = true;
+        GeneralDataPower();
     }
 
     public void Jump()
@@ -72,6 +83,8 @@ public class MenuManager : MonoBehaviour
     }
 
 
+
+    // PauseMenu
     public void PauseMenu()
     {
         PauseGameCanvas.SetActive(true);
@@ -93,4 +106,18 @@ public class MenuManager : MonoBehaviour
         SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
         SpawnManagerScript.ShowPowerUps = false;
     }
+
+    /*public void ActivateButtons()
+    {
+        int random1 = Random.Range(0, PowerUpsButtons.Length);
+        int random2 = Random.Range(0, PowerUpsButtons.Length);
+        int random3 = Random.Range(0, PowerUpsButtons.Length);
+        PowerUpsButtons[random1].SetActive(true);
+        PowerUpsButtons[random2].SetActive(true);
+        PowerUpsButtons[random3].SetActive(true);
+
+        //int RandomPick = Random.Range(0, 3);
+       // PickCardRandom.Add(RandomPick);
+        
+    }*/
 }
