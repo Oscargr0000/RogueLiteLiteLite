@@ -25,7 +25,7 @@ public class SpawnManager : MonoBehaviour
     private GameManager GameManagerScrpipt;
     
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         GameManagerScrpipt = FindObjectOfType<GameManager>();
@@ -36,7 +36,7 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         EnemyLeft = FindObjectsOfType<Enemy>().Length;

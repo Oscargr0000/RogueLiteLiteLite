@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
     public GameObject[] PowerUpsButtons;
     
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         WeaponsScript = FindObjectOfType<Weapons>();

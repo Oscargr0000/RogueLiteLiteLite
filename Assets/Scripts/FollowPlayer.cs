@@ -10,7 +10,7 @@ public class FollowPlayer : MonoBehaviour
 
     public bool ShieldActive;
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (ShieldActive == true)

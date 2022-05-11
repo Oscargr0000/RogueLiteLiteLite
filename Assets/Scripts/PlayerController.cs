@@ -20,10 +20,10 @@ public class PlayerController : MonoBehaviour
     public float HP;
 
     private Rigidbody RigidBodyComponent;
+    public LayerMask GroundLayer;
 
     
 
-    // Start is called before the first frame update
     void Start()
     {
         RigidBodyComponent = GetComponent<Rigidbody>();
@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 
 
 
-    // Update is called once per frame
     void Update()
     {
         // El movimiento funciona con WASD para avanzar y para girar con el raton
@@ -61,6 +60,11 @@ public class PlayerController : MonoBehaviour
         {
             speed -= RunningSpeed;
         }
+
+        /*if(ItsOnTheGround() == true)
+        {
+            Jumps = 0;
+        }*/
         
     }
 
@@ -72,6 +76,19 @@ public class PlayerController : MonoBehaviour
         {
             Jumps = 0;
         }
+    }
+
+    private bool ItsOnTheGround() // MIRAR DE UTILIZAR
+    {
+        float yOffset = 0.2f;
+        Vector3 origin = transform.position;
+        BoxCollider PlayerCollider = GetComponent<BoxCollider>();
+
+        Physics.Raycast(origin, Vector3.down, out RaycastHit hit, PlayerCollider.size.y + yOffset, GroundLayer);
+
+        Color raycastColor = hit.collider != null ? Color.green : Color.magenta;
+        Debug.DrawRay(origin, Vector3.down * (PlayerCollider.size.y + yOffset), raycastColor, 0, false);
+        return hit.collider != null;
     }
 
     private void OnTriggerEnter(Collider other)
