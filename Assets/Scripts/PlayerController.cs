@@ -82,12 +82,12 @@ public class PlayerController : MonoBehaviour
     {
         float yOffset = 0.2f;
         Vector3 origin = transform.position;
-        BoxCollider PlayerCollider = GetComponent<BoxCollider>();
+        CapsuleCollider PlayerCollider = GetComponent<CapsuleCollider>();
 
-        Physics.Raycast(origin, Vector3.down, out RaycastHit hit, PlayerCollider.size.y + yOffset, GroundLayer);
+        Physics.Raycast(origin, Vector3.down, out RaycastHit hit, PlayerCollider.height + yOffset, GroundLayer);
 
         Color raycastColor = hit.collider != null ? Color.green : Color.magenta;
-        Debug.DrawRay(origin, Vector3.down * (PlayerCollider.size.y + yOffset), raycastColor, 0, false);
+        Debug.DrawRay(origin, Vector3.down * (PlayerCollider.height + yOffset), raycastColor, 0, false);
         return hit.collider != null;
     }
 
