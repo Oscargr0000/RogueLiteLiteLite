@@ -21,12 +21,15 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody RigidBodyComponent;
     public LayerMask GroundLayer;
+    public GameObject RunningPT;
 
     
 
     void Start()
     {
         RigidBodyComponent = GetComponent<Rigidbody>();
+        RunningPT.SetActive(false);
+           
     }
 
 
@@ -56,9 +59,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             speed += RunningSpeed;
+            RunningPT.SetActive(true);
         }else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             speed -= RunningSpeed;
+            RunningPT.SetActive(false);
         }
 
         /*if(ItsOnTheGround() == true)

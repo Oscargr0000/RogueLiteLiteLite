@@ -110,11 +110,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8601026334437f4fb3d276b3a926822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHP: 30
+  EnemyHP: 20
   Damage: 10
   Speed: 10
   HPprobability: 0
   HpRecover: {fileID: 3339251192533962942, guid: d307d2450a5dd8d499e32b1a85db13cd, type: 3}
+  Type: 0
 --- !u!54 &1719623886003677882
 Rigidbody:
   m_ObjectHideFlags: 0

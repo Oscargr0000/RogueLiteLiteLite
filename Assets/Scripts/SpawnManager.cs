@@ -79,7 +79,7 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    private void MostrarPowerUps()
+    public void MostrarPowerUps()
     {
         if (TotalRounds % 5 == 0)
         {

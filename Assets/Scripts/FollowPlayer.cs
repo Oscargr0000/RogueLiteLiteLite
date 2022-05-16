@@ -8,7 +8,7 @@ public class FollowPlayer : MonoBehaviour
     public GameObject player;
     private Vector3 DesactivatedPos = new Vector3(0, -5, 0);
 
-    public bool ShieldActive;
+    public bool ShieldActive = false;
 
     
     void Update()

@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    rojo,
+    lila
+}
 public class Enemy : MonoBehaviour
 {
     private GameObject Player;
@@ -11,16 +16,33 @@ public class Enemy : MonoBehaviour
     public int HPprobability;
     public GameObject HpRecover;
 
+    private float knokback = 10f;
+    private Rigidbody enemyRigidbody;
+
     private GameManager GameMangerScript;
     private PlayerController PlayerControllerScript;
+    private FollowPlayer FollowPlayerScript;
 
+    public EnemyType Type;
     // Start is called before the first frame update
     void Start()
     {
         Player = GameObject.Find("Player");
+        enemyRigidbody = GetComponent<Rigidbody>();
 
         GameMangerScript = FindObjectOfType<GameManager>();
         PlayerControllerScript = FindObjectOfType<PlayerController>();
+        FollowPlayerScript = FindObjectOfType<FollowPlayer>();
+
+        if (Type == EnemyType.rojo)
+        {
+            // enemyHp == DataPersistanceHProjo + Multiplicador
+        }
+        else if( Type == EnemyType.lila)
+        {
+            // enemyHp == DataPersistanceHPlila + Multiplicador
+        }
+       
 
 
     }
@@ -35,7 +57,6 @@ public class Enemy : MonoBehaviour
         }
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
 
-
         //Quitar esta linea de codigo
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -49,6 +70,16 @@ public class Enemy : MonoBehaviour
         {
             PlayerControllerScript.HP -= Damage;
             Debug.Log($"Player:{PlayerControllerScript.HP}");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Shield"))
+        {
+            Vector3 direction = (Player.transform.position - transform.position).normalized;
+            enemyRigidbody.AddForce(direction * knokback);
+            FollowPlayerScript.ShieldActive = false;
         }
     }
 
