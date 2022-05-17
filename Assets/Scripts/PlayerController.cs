@@ -32,16 +32,18 @@ public class PlayerController : MonoBehaviour
            
     }
 
-
+   
 
     void Update()
     {
         // El movimiento funciona con WASD para avanzar y para girar con el raton
         verticalInput = Input.GetAxis("Vertical");
-        transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
+        //transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
+        RigidBodyComponent.AddForce(Vector3.forward * speed * Time.deltaTime * verticalInput);
 
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
+        //transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
+        RigidBodyComponent.AddForce(Vector3.right * speed * Time.deltaTime * horizontalInput);
 
         MouseXInput = Input.GetAxis("Mouse X");
         transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * MouseXInput);
@@ -51,7 +53,7 @@ public class PlayerController : MonoBehaviour
         // Salto + Contador de saltos realizados
         if (Input.GetKeyDown(KeyCode.Space) && Jumps <= JumpMax)
         {
-            RigidBodyComponent.AddForce(Vector3.up * 20000);
+            RigidBodyComponent.AddForce(Vector3.up * 500, ForceMode.Impulse);
             Jumps++;
         }
 
