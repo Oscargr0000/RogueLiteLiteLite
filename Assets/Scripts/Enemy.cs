@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
     private GameManager GameMangerScript;
     private PlayerController PlayerControllerScript;
     private FollowPlayer FollowPlayerScript;
+    public Animator EnemyAttack;
 
     public EnemyType Type;
 
@@ -75,7 +76,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerControllerScript.HP -= Damage;
+            EnemyAttack.SetTrigger("AttaqueEnemigo");
+            EnemyAttack.SetTrigger("RedAttack");
             Debug.Log($"Player:{PlayerControllerScript.HP}");
         }
     }
@@ -97,7 +99,11 @@ public class Enemy : MonoBehaviour
         if(HPprobability == 1)
         {
             Instantiate(HpRecover, transform.position, transform.rotation);
+        }else if( HPprobability == 2)
+        {
+            Instantiate(HpRecover, transform.position, transform.rotation);
         }
+
         Destroy(gameObject);
         //Partoculas
         //sonido 

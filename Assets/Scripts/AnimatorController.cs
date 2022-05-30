@@ -8,6 +8,7 @@ public class AnimatorController : MonoBehaviour
 
     public Animator SwordAnimator;
     public Animator HondaAttack;
+   
 
     public GameObject HondaSword;
     public GameObject Player;
@@ -29,16 +30,7 @@ public class AnimatorController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             SwordAnimator.SetTrigger("Attack");
-            print("Click");
-
-            if (MenuManagerScript.HondaAttack == true)
-            {
-                HondaSword.transform.position = new Vector3(Player.transform.position.x, Player.transform.position.y, Player.transform.position.z + 1);
-                HondaSword.transform.rotation = Quaternion.Euler(Player.transform.rotation.x, Player.transform.rotation.y, Player.transform.rotation.z);
-                //HondaSword.SetActive(true);
-                HondaAttack.SetTrigger("Activate");
-
-            }
+            print("Click");   
         }
     }
 }

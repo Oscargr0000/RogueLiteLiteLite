@@ -23,6 +23,7 @@ public class MenuManager : MonoBehaviour
     public GameObject PauseAlert;
     public GameObject GameOverCanvas;
     public TextMeshProUGUI HpText;
+    public TextMeshProUGUI RoundText;
 
 
     //POWERUPS
@@ -32,6 +33,7 @@ public class MenuManager : MonoBehaviour
     
     void Start()
     {
+        GameOverCanvas.SetActive(false);
         WeaponsScript = FindObjectOfType<Weapons>();
         PlayerControllerScript = FindObjectOfType<PlayerController>();
         GameManagerScript = FindObjectOfType<GameManager>();
@@ -41,14 +43,20 @@ public class MenuManager : MonoBehaviour
         PauseGameCanvas.SetActive(false);
         FollowPlayerScript.ShieldActive = false;
         PauseAlert.SetActive(false);
-        HpText = GetComponent<TextMeshProUGUI>();
         
     }
 
     private void Update()
     {
         string getHP = PlayerControllerScript. HP.ToString();
-        HpText.text = getHP; // NO SE PORQUE NO FUNCIONA
+        int Round = SpawnManagerScript.totalEnemy;
+        string getRound = Round.ToString();
+
+        HpText.text = getHP;
+        RoundText.text = getRound;
+       
+
+
         if (SpawnManagerScript.ShowPowerUps == true)
         {
             PowerUpsCanvas.SetActive(true);
@@ -126,7 +134,10 @@ public class MenuManager : MonoBehaviour
 
     
 
-
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(1);
+    }
 
 
     private void GeneralDataPower()

@@ -21,14 +21,17 @@ public class PlayerController : MonoBehaviour
 
     public float HP = 100f;
 
-    private Rigidbody RigidBodyComponent;
+    public Rigidbody RigidBodyComponent;
     public LayerMask GroundLayer;
     public GameObject RunningPT;
+
+    private Enemy ES;
 
     
 
     void Start()
     {
+        ES = FindObjectOfType<Enemy>();
         RigidBodyComponent = GetComponent<Rigidbody>();
         RunningPT.SetActive(false);
         Physics.gravity = GravityForce;
@@ -85,6 +88,7 @@ public class PlayerController : MonoBehaviour
         {
             Jumps = 0;
         }
+        
     }
 
     private bool ItsOnTheGround() // MIRAR DE UTILIZAR
@@ -107,6 +111,11 @@ public class PlayerController : MonoBehaviour
             HP += 5;
             Debug.Log(HP);
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("EnemyHit"))
+        {
+            HP -= ES.Damage;
         }
     }
 }

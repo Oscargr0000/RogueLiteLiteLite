@@ -10,14 +10,14 @@ public class GameManager : MonoBehaviour
     private SpawnManager SpawnManagerScript;
     private MenuManager MenuManagerScript;
     private PlayerController PlayerControllerScript;
+    private AnimatorController ACS;
 
     public bool GOP;
 
     // Start is called before the first frame update
     void Start()
     {
-
-        MenuManagerScript.GameOverCanvas.SetActive(false);
+        ACS = FindObjectOfType<AnimatorController>();
         SpawnManagerScript = FindObjectOfType<SpawnManager>();
         EnemyScript = FindObjectOfType<Enemy>();
         MenuManagerScript = FindObjectOfType<MenuManager>();
@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
             GameOverPlayer();
         }
 
+        if(GOP == true)
+        {
+            ACS.enabled = false;
+        }
     }
 
     void GameOverPlayer()
