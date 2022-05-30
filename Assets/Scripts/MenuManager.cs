@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class MenuManager : MonoBehaviour
     public GameObject PowerUpsCanvas;
     public GameObject PauseGameCanvas;
     public GameObject PauseAlert;
+    public GameObject GameOverCanvas;
+    public TextMeshProUGUI HpText;
 
 
     //POWERUPS
@@ -37,11 +41,15 @@ public class MenuManager : MonoBehaviour
         PauseGameCanvas.SetActive(false);
         FollowPlayerScript.ShieldActive = false;
         PauseAlert.SetActive(false);
+        HpText = GetComponent<TextMeshProUGUI>();
+        
     }
 
     private void Update()
     {
-        if(SpawnManagerScript.ShowPowerUps == true)
+        string getHP = PlayerControllerScript. HP.ToString();
+        HpText.text = getHP; // NO SE PORQUE NO FUNCIONA
+        if (SpawnManagerScript.ShowPowerUps == true)
         {
             PowerUpsCanvas.SetActive(true);
             //ActivateButtons(); 

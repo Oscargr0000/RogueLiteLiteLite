@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject Player;
 
-    public float speed = 15f;
+    public float speed = 10f;
     private float RunningSpeed = 5f;
     private float verticalInput;
     private float horizontalInput;
-    private float rotationSpeed = 400f;
+    private float rotationSpeed = 200f;
     private float MouseXInput;
+    private Vector3 GravityForce = new Vector3(0, -9.8f, 0);
 
     public bool itsOntheGround;
 
     private int Jumps;
     public int JumpMax = 1;
 
-    public float HP;
+    public float HP = 100f;
 
     private Rigidbody RigidBodyComponent;
     public LayerMask GroundLayer;
@@ -29,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         RigidBodyComponent = GetComponent<Rigidbody>();
         RunningPT.SetActive(false);
-           
+        Physics.gravity = GravityForce;
     }
 
    
@@ -37,18 +39,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // El movimiento funciona con WASD para avanzar y para girar con el raton
-        verticalInput = Input.GetAxis("Vertical");
-        //transform.Translate(Vector3.forward * speed * Time.deltaTime * verticalInput);
-        RigidBodyComponent.AddForce(Vector3.forward * speed * Time.deltaTime * verticalInput);
 
-        horizontalInput = Input.GetAxis("Horizontal");
-        //transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
-        RigidBodyComponent.AddForce(Vector3.right * speed * Time.deltaTime * horizontalInput);
-
+        //Movimiento del Raton
         MouseXInput = Input.GetAxis("Mouse X");
-        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime * MouseXInput);
+        Quaternion CurrenteRotation = Quaternion.Euler(new Vector3(0f, rotationSpeed, 0f) * Time.deltaTime * MouseXInput);
+        RigidBodyComponent.MoveRotation(RigidBodyComponent.rotation * CurrenteRotation);
 
-         
+        //Movimiento del Player
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        Vector3 RbMovement = new Vector3(horizontalInput, 0, verticalInput);
+        RbMovement = transform.TransformDirection(RbMovement);
+
+        RigidBodyComponent.MovePosition(RigidBodyComponent.position + RbMovement * speed * Time.deltaTime);
+
 
         // Salto + Contador de saltos realizados
         if (Input.GetKeyDown(KeyCode.Space) && Jumps <= JumpMax)
@@ -66,12 +71,9 @@ public class PlayerController : MonoBehaviour
         {
             speed -= RunningSpeed;
             RunningPT.SetActive(false);
-        }
+        }    
 
-        /*if(ItsOnTheGround() == true)
-        {
-            Jumps = 0;
-        }*/
+
         
     }
 

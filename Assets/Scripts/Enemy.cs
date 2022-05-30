@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     private FollowPlayer FollowPlayerScript;
 
     public EnemyType Type;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,9 +54,13 @@ public class Enemy : MonoBehaviour
     void Update()
     {
        
-        if (GameMangerScript.GameOver == false)
+        if (GameMangerScript.GOP == false)
         {
             transform.LookAt(Player.transform);
+        }
+        else
+        {
+            Speed = 0f;
         }
         transform.Translate(Vector3.forward * Speed * Time.deltaTime);
 
