@@ -24,6 +24,8 @@ public class MenuManager : MonoBehaviour
     public GameObject GameOverCanvas;
     public TextMeshProUGUI HpText;
     public TextMeshProUGUI RoundText;
+    private AudioManager AMS;
+
 
 
     //POWERUPS
@@ -33,6 +35,8 @@ public class MenuManager : MonoBehaviour
     
     void Start()
     {
+        AMS = FindObjectOfType<AudioManager>();
+
         GameOverCanvas.SetActive(false);
         WeaponsScript = FindObjectOfType<Weapons>();
         PlayerControllerScript = FindObjectOfType<PlayerController>();
@@ -109,27 +113,32 @@ public class MenuManager : MonoBehaviour
     {
         PauseGameCanvas.SetActive(true);
         Time.timeScale = 0;
+        AMS.PlaySound(10);
     }
 
     public void ReturnPlay()
     {
         PauseGameCanvas.SetActive(false);
         Time.timeScale = 1;
+        AMS.PlaySound(10);
     }
 
     public void Escape()
     {
         PauseAlert.SetActive(true);
+        AMS.PlaySound(10);
     }
 
     public void OkayEscape()
     {
         SceneManager.LoadScene(0);
+        AMS.PlaySound(10);
     }
 
     public void NoEscape()
     {
         PauseAlert.SetActive(false);
+        AMS.PlaySound(10);
     }
 
     
@@ -137,6 +146,7 @@ public class MenuManager : MonoBehaviour
     public void PlayAgain()
     {
         SceneManager.LoadScene(1);
+        AMS.PlaySound(10);
     }
 
 
@@ -145,5 +155,6 @@ public class MenuManager : MonoBehaviour
         GameManagerScript.RoundNum = 0;
         SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
         SpawnManagerScript.ShowPowerUps = false;
+        AMS.PlaySound(4);
     }
 }

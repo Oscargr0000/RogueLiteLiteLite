@@ -23,9 +23,9 @@ public class SpawnManager : MonoBehaviour
 
 
     private GameManager GameManagerScrpipt;
-    
 
-    
+
+
     void Start()
     {
         GameManagerScrpipt = FindObjectOfType<GameManager>();

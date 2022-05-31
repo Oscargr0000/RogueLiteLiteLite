@@ -11,17 +11,22 @@ public class GameManager : MonoBehaviour
     private MenuManager MenuManagerScript;
     private PlayerController PlayerControllerScript;
     private AnimatorController ACS;
+    private AudioManager AMS;
+
 
     public bool GOP;
 
     // Start is called before the first frame update
     void Start()
     {
+        AMS = FindObjectOfType<AudioManager>();
+
         ACS = FindObjectOfType<AnimatorController>();
         SpawnManagerScript = FindObjectOfType<SpawnManager>();
         EnemyScript = FindObjectOfType<Enemy>();
         MenuManagerScript = FindObjectOfType<MenuManager>();
         PlayerControllerScript = FindObjectOfType<PlayerController>();
+
 
         GOP = false;
 
@@ -47,8 +52,7 @@ public class GameManager : MonoBehaviour
         Destroy(PlayerControllerScript.Player);
         GOP = true;
         MenuManagerScript.GameOverCanvas.SetActive(true);
-        //HUD
         //Particulas
-        //Sonidos
+        AMS.PlaySound(5);
     }
 }

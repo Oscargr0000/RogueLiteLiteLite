@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyHP: 20
   Damage: 10
-  Speed: 10
+  Speed: 8
   HPprobability: 0
   HpRecover: {fileID: 3339251192533962942, guid: d307d2450a5dd8d499e32b1a85db13cd, type: 3}
   EnemyAttack: {fileID: 6718032195602454833}

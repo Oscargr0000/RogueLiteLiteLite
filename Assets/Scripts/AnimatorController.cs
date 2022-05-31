@@ -12,13 +12,15 @@ public class AnimatorController : MonoBehaviour
 
     public GameObject HondaSword;
     public GameObject Player;
-
+    private AudioManager AMS;
     private MenuManager MenuManagerScript;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        AMS = FindObjectOfType<AudioManager>();
+
         MenuManagerScript = FindObjectOfType<MenuManager>();
         //HondaSword.SetActive(false);
     }
@@ -29,6 +31,7 @@ public class AnimatorController : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
+            AMS.PlaySound(0);
             SwordAnimator.SetTrigger("Attack");
             print("Click");   
         }

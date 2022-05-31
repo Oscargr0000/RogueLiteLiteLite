@@ -16,13 +16,16 @@ public class Enemy : MonoBehaviour
     public int HPprobability;
     public GameObject HpRecover;
 
-    private float knokback = 10f;
+    private float knokback = 1000f;
     private Rigidbody enemyRigidbody;
 
     private GameManager GameMangerScript;
     private PlayerController PlayerControllerScript;
     private FollowPlayer FollowPlayerScript;
     public Animator EnemyAttack;
+    private AudioManager AMS;
+
+    Vector3 direction;
 
     public EnemyType Type;
 
@@ -31,12 +34,13 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Player = GameObject.Find("Player");
         enemyRigidbody = GetComponent<Rigidbody>();
-
         GameMangerScript = FindObjectOfType<GameManager>();
         PlayerControllerScript = FindObjectOfType<PlayerController>();
         FollowPlayerScript = FindObjectOfType<FollowPlayer>();
+        AMS = FindObjectOfType<AudioManager>();
 
         if (Type == EnemyType.rojo)
         {
@@ -54,10 +58,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        direction = (Player.transform.position - transform.position).normalized;
+
         if (GameMangerScript.GOP == false)
         {
-            transform.LookAt(Player.transform);
+            //Look at con fisicas
+            Quaternion RotationP = Quaternion.LookRotation(direction, Vector3.up);
+            transform.rotation = RotationP;
         }
         else
         {
@@ -78,7 +85,9 @@ public class Enemy : MonoBehaviour
         {
             EnemyAttack.SetTrigger("AttaqueEnemigo");
             EnemyAttack.SetTrigger("RedAttack");
-            Debug.Log($"Player:{PlayerControllerScript.HP}");
+
+            int RandomSaound = Random.Range(1, 3);
+            AMS.PlaySound(RandomSaound);
         }
     }
 
@@ -86,9 +95,11 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Shield"))
         {
-            Vector3 direction = (Player.transform.position - transform.position).normalized;
-            enemyRigidbody.AddForce(direction * knokback);
+
+            Empuje(knokback);
+            AMS.PlaySound(7);
             FollowPlayerScript.ShieldActive = false;
+
         }
     }
 
@@ -106,6 +117,11 @@ public class Enemy : MonoBehaviour
 
         Destroy(gameObject);
         //Partoculas
-        //sonido 
+        AMS.PlaySound(6);
+    }
+
+    public void Empuje(float Fuerza)
+    {
+        enemyRigidbody.AddForce(-direction * Fuerza, ForceMode.Impulse);
     }
 }

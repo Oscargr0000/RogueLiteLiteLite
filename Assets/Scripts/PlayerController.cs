@@ -24,13 +24,14 @@ public class PlayerController : MonoBehaviour
     public Rigidbody RigidBodyComponent;
     public LayerMask GroundLayer;
     public GameObject RunningPT;
-
+    private AudioManager AMS;
     private Enemy ES;
 
     
 
     void Start()
     {
+        AMS = FindObjectOfType<AudioManager>();
         ES = FindObjectOfType<Enemy>();
         RigidBodyComponent = GetComponent<Rigidbody>();
         RunningPT.SetActive(false);
@@ -70,14 +71,12 @@ public class PlayerController : MonoBehaviour
         {
             speed += RunningSpeed;
             RunningPT.SetActive(true);
+            AMS.PlaySound(8);
         }else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             speed -= RunningSpeed;
             RunningPT.SetActive(false);
         }    
-
-
-        
     }
 
 

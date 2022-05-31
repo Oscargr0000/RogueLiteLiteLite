@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     public GameObject[] GeneralCanvas;
+    private AudioManager AMS;
 
     private void Start()
     {
+        AMS = FindObjectOfType<AudioManager>();
         GeneralCanvas[0].SetActive(true);
         GeneralCanvas[1].SetActive(false);
         GeneralCanvas[2].SetActive(false);
@@ -15,16 +17,19 @@ public class MainMenuManager : MonoBehaviour
     public void Options()
     {
         GeneralChange(0, 1);
+        Sounds();
     }
 
     public void Play()
     {
         GeneralChange(0, 2);
+        Sounds();
     }
 
     public void Return()
     {
         GeneralChange(1, 0);
+        Sounds();
     }
 
     public void Espada()
@@ -45,5 +50,9 @@ public class MainMenuManager : MonoBehaviour
     {
         GeneralCanvas[FalseCanvas].SetActive(false);
         GeneralCanvas[TrueCanvas].SetActive(true);
+    }
+    void Sounds()
+    {
+        AMS.PlaySound(9);
     }
 }
