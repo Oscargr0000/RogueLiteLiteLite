@@ -22,13 +22,9 @@ public class SpawnManager : MonoBehaviour
     private float RandomZ;
 
 
-    private GameManager GameManagerScrpipt;
-
-
 
     void Start()
     {
-        GameManagerScrpipt = FindObjectOfType<GameManager>();
         RandomNum = Random.Range(0, 2);
 
         SpawnEnemyWave(totalEnemy);
