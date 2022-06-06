@@ -28,7 +28,8 @@ public class SpawnManager : MonoBehaviour
         RandomNum = Random.Range(0, 2);
 
         SpawnEnemyWave(totalEnemy);
-        
+        Cursor.lockState = CursorLockMode.Locked;
+
 
     }
 
@@ -39,15 +40,23 @@ public class SpawnManager : MonoBehaviour
         if (EnemyLeft <= 0)
         {
             MostrarPowerUps();
+            Cursor.lockState = CursorLockMode.Confined;
             while (ShowPowerUps)
             {
                 return;
             }
 
+            
             totalEnemy++;
             SpawnEnemyWave(totalEnemy);
-            
+           
         }
+
+        if (!ShowPowerUps)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
     }
 
     Vector3 RandomSpawnPos()

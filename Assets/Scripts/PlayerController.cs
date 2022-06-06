@@ -74,6 +74,11 @@ public class PlayerController : MonoBehaviour
             Jumps++;
         }
 
+        if (GOP)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+
         //Running
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
