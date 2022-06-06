@@ -17,11 +17,6 @@ public class AudioManager : MonoBehaviour
         AS.PlayOneShot(Sound[SoundNum], 1);
     }
 
-    public void StopSound()
-    {
-        AS.Stop();
-    }
-
     // 0 = Sonido Espada
     // 1 y 2 = Sonido Golpe Enemigo
     // 3  = Golpe a Enemigos

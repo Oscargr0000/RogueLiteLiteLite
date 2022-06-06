@@ -22,8 +22,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void Play()
     {
-        //GeneralChange(0, 2);
-        SceneManager.LoadScene(1);
+        GeneralChange(0, 2);
         Sounds();
     }
 

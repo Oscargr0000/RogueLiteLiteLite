@@ -10,10 +10,13 @@ public class MenuManager : MonoBehaviour
 {
     private Weapons WeaponsScript;
     private PlayerController PlayerControllerScript;
+    private GameManager GameManagerScript;
     private SpawnManager SpawnManagerScript;
     private FollowPlayer FollowPlayerScript;
 
-    public int RoundNum = 1;
+    
+
+    public bool HondaAttack = true;
 
     public GameObject PowerUpsCanvas;
     public GameObject PauseGameCanvas;
@@ -22,7 +25,6 @@ public class MenuManager : MonoBehaviour
     public TextMeshProUGUI HpText;
     public TextMeshProUGUI RoundText;
     private AudioManager AMS;
-    public ParticleSystem SparkPS;
 
 
 
@@ -38,6 +40,7 @@ public class MenuManager : MonoBehaviour
         GameOverCanvas.SetActive(false);
         WeaponsScript = FindObjectOfType<Weapons>();
         PlayerControllerScript = FindObjectOfType<PlayerController>();
+        GameManagerScript = FindObjectOfType<GameManager>();
         SpawnManagerScript = FindObjectOfType<SpawnManager>();
         FollowPlayerScript = FindObjectOfType<FollowPlayer>();
         PowerUpsCanvas.SetActive(false);
@@ -90,13 +93,17 @@ public class MenuManager : MonoBehaviour
     {
         FollowPlayerScript.ShieldActive = true;
         GeneralDataPower();
-        StartCoroutine("DesactivarEscudo");
     }
 
     public void Jump()
     {
         PlayerControllerScript.JumpMax =+ 1;
         GeneralDataPower();
+    }
+
+    public void EffectSword()
+    {
+        HondaAttack = true;
     }
 
 
@@ -145,15 +152,9 @@ public class MenuManager : MonoBehaviour
 
     private void GeneralDataPower()
     {
+        GameManagerScript.RoundNum = 0;
         SpawnManagerScript.SpawnEnemyWave(Random.Range(2, 3));
         SpawnManagerScript.ShowPowerUps = false;
         AMS.PlaySound(4);
-        Instantiate(SparkPS, PlayerControllerScript.Player.transform.position, PlayerControllerScript.Player.transform.rotation);
-    }
-
-    IEnumerator DesactivarEscudo()
-    {
-        yield return new WaitForSeconds(30f);
-        FollowPlayerScript.ShieldActive = false;
     }
 }

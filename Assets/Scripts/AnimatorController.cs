@@ -33,6 +33,7 @@ public class AnimatorController : MonoBehaviour
         {
             AMS.PlaySound(0);
             SwordAnimator.SetTrigger("Attack");
+            print("Click");   
         }
     }
 }

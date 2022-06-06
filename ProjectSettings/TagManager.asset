@@ -9,7 +9,6 @@ TagManager:
   - Heal
   - Shield
   - EnemyHit
-  - DetectPlayer
   layers:
   - Default
   - TransparentFX

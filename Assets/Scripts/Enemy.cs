@@ -16,13 +16,14 @@ public class Enemy : MonoBehaviour
     public int HPprobability;
     public GameObject HpRecover;
 
+    private float knokback = 1000f;
     private Rigidbody enemyRigidbody;
 
+    private GameManager GameMangerScript;
     private PlayerController PlayerControllerScript;
-    private AudioManager AMS;
-
+    private FollowPlayer FollowPlayerScript;
     public Animator EnemyAttack;
-    
+    private AudioManager AMS;
 
     Vector3 direction;
 
@@ -35,9 +36,10 @@ public class Enemy : MonoBehaviour
     {
 
         Player = GameObject.Find("Player");
-
         enemyRigidbody = GetComponent<Rigidbody>();
+        GameMangerScript = FindObjectOfType<GameManager>();
         PlayerControllerScript = FindObjectOfType<PlayerController>();
+        FollowPlayerScript = FindObjectOfType<FollowPlayer>();
         AMS = FindObjectOfType<AudioManager>();
 
         if (Type == EnemyType.rojo)
@@ -53,12 +55,13 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
-        if (PlayerControllerScript.GOP == false)
-        {
-            direction = (Player.transform.position - transform.position).normalized;
+        direction = (Player.transform.position - transform.position).normalized;
 
+        if (GameMangerScript.GOP == false)
+        {
             //Look at con fisicas
             Quaternion RotationP = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = RotationP;
@@ -67,15 +70,8 @@ public class Enemy : MonoBehaviour
         {
             Speed = 0f;
         }
-        Vector3 RBMovement = Vector3.forward;
-        RBMovement = transform.TransformDirection(RBMovement);
+        transform.Translate(Vector3.forward * Speed * Time.deltaTime);
 
-        enemyRigidbody.MovePosition(enemyRigidbody.position + RBMovement * Speed * Time.deltaTime);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         //Quitar esta linea de codigo
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -85,36 +81,36 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            EnemyAttack.SetTrigger("AttaqueEnemigo");
+            EnemyAttack.SetTrigger("RedAttack");
+
+            int RandomSaound = Random.Range(1, 3);
+            AMS.PlaySound(RandomSaound);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.gameObject.CompareTag("Player"))
-        {
-            EnemyAttack.SetTrigger("AttaqueEnemigo");
-            EnemyAttack.SetTrigger("RedAttack");
-        }
-
-
         if (other.gameObject.CompareTag("Shield"))
         {
-            Empuje(13f);
+
+            Empuje(knokback);
             AMS.PlaySound(7);
+            FollowPlayerScript.ShieldActive = false;
+
         }
     }
 
     public void DestroyEnemy()
     {
-        Vector3 RecoverLifeSP = new Vector3(transform.position.x, 1, transform.position.z);
+        
         HPprobability = Random.Range(1, 10);
-
         if(HPprobability == 1)
         {
-            Instantiate(HpRecover, RecoverLifeSP, transform.rotation);
-        }
-        else if( HPprobability == 2)
+            Instantiate(HpRecover, transform.position, transform.rotation);
+        }else if( HPprobability == 2)
         {
             Instantiate(HpRecover, transform.position, transform.rotation);
         }
@@ -126,6 +122,6 @@ public class Enemy : MonoBehaviour
 
     public void Empuje(float Fuerza)
     {
-        enemyRigidbody.AddForce(-direction * Fuerza, ForceMode.VelocityChange);
+        enemyRigidbody.AddForce(-direction * Fuerza, ForceMode.Impulse);
     }
 }

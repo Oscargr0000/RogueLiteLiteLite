@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public GameObject Player;
 
     public float speed = 10f;
-    private float RunningSpeed = 2f;
+    private float RunningSpeed = 5f;
     private float verticalInput;
     private float horizontalInput;
     private float rotationSpeed = 200f;
@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 GravityForce = new Vector3(0, -9.8f, 0);
 
     public bool itsOntheGround;
-    public bool GOP;
 
     private int Jumps;
     public int JumpMax = 1;
@@ -27,25 +26,21 @@ public class PlayerController : MonoBehaviour
     public GameObject RunningPT;
     private AudioManager AMS;
     private Enemy ES;
-    private MenuManager MenuManagerScript;
-    private AnimatorController ACS;
 
-
+    
 
     void Start()
     {
         AMS = FindObjectOfType<AudioManager>();
-        ACS = FindObjectOfType<AnimatorController>();
         ES = FindObjectOfType<Enemy>();
         RigidBodyComponent = GetComponent<Rigidbody>();
-        MenuManagerScript = FindObjectOfType<MenuManager>();
         RunningPT.SetActive(false);
-
-        GOP = false;
         Physics.gravity = GravityForce;
     }
 
-    private void FixedUpdate()
+   
+
+    void Update()
     {
         // El movimiento funciona con WASD para avanzar y para girar con el raton
 
@@ -58,19 +53,16 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
 
-        Vector3 RbMovement = new Vector3(horizontalInput, 0f, verticalInput);
+        Vector3 RbMovement = new Vector3(horizontalInput, 0, verticalInput);
         RbMovement = transform.TransformDirection(RbMovement);
 
         RigidBodyComponent.MovePosition(RigidBodyComponent.position + RbMovement * speed * Time.deltaTime);
-    }
 
-    void Update()
-    {
 
         // Salto + Contador de saltos realizados
         if (Input.GetKeyDown(KeyCode.Space) && Jumps <= JumpMax)
         {
-            RigidBodyComponent.AddForce(Vector3.up * 500f, ForceMode.Impulse);
+            RigidBodyComponent.AddForce(Vector3.up * 500, ForceMode.Impulse);
             Jumps++;
         }
 
@@ -80,12 +72,10 @@ public class PlayerController : MonoBehaviour
             speed += RunningSpeed;
             RunningPT.SetActive(true);
             AMS.PlaySound(8);
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        }else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             speed -= RunningSpeed;
             RunningPT.SetActive(false);
-            AMS.StopSound();
         }    
     }
 
@@ -100,7 +90,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    /*private bool ItsOnTheGround() // MIRAR DE UTILIZAR
+    private bool ItsOnTheGround() // MIRAR DE UTILIZAR
     {
         float yOffset = 0.2f;
         Vector3 origin = transform.position;
@@ -111,7 +101,7 @@ public class PlayerController : MonoBehaviour
         Color raycastColor = hit.collider != null ? Color.green : Color.magenta;
         Debug.DrawRay(origin, Vector3.down * (PlayerCollider.height + yOffset), raycastColor, 0, false);
         return hit.collider != null;
-    }*/
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -125,29 +115,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyHit"))
         {
             HP -= ES.Damage;
-
-            int RandomSaound = Random.Range(1, 3);
-            AMS.PlaySound(RandomSaound);
-
-            if (HP <= 0)
-            {
-                GameOverPlayer();
-            }
-
-            if (GOP == true)
-            {
-                ACS.enabled = false;
-            }
         }
- 
-    }
-
-    void GameOverPlayer()
-    {
-        Destroy(gameObject);
-        GOP = true;
-        MenuManagerScript.GameOverCanvas.SetActive(true);
-        //Particulas
-        AMS.PlaySound(5);
     }
 }
