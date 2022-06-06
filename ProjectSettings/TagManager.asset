@@ -10,6 +10,8 @@ TagManager:
   - Shield
   - EnemyHit
   - DetectPlayer
+  - FxTemporaire
+  - Wall
   layers:
   - Default
   - TransparentFX

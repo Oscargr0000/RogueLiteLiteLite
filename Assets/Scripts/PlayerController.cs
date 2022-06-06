@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private Enemy ES;
     private MenuManager MenuManagerScript;
     private AnimatorController ACS;
+    public ParticleSystem Deap_ps;
+    public ParticleSystem Heal_ps;
 
 
 
@@ -74,11 +76,6 @@ public class PlayerController : MonoBehaviour
             Jumps++;
         }
 
-        if (GOP)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-        }
-
         //Running
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -102,22 +99,14 @@ public class PlayerController : MonoBehaviour
         {
             Jumps = 0;
         }
+
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Vector3 Direccion = transform.position - collision.gameObject.transform.position;
+            RigidBodyComponent.AddForce(-Direccion * 50f, ForceMode.Impulse);
+        }
         
     }
-
-    /*private bool ItsOnTheGround() // MIRAR DE UTILIZAR
-    {
-        float yOffset = 0.2f;
-        Vector3 origin = transform.position;
-        CapsuleCollider PlayerCollider = GetComponent<CapsuleCollider>();
-
-        Physics.Raycast(origin, Vector3.down, out RaycastHit hit, PlayerCollider.height + yOffset, GroundLayer);
-
-        Color raycastColor = hit.collider != null ? Color.green : Color.magenta;
-        Debug.DrawRay(origin, Vector3.down * (PlayerCollider.height + yOffset), raycastColor, 0, false);
-        return hit.collider != null;
-    }*/
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Heal"))
@@ -125,6 +114,11 @@ public class PlayerController : MonoBehaviour
             HP += 5;
             Debug.Log(HP);
             Destroy(other.gameObject);
+            Instantiate(Heal_ps, transform.position, transform.rotation);
+            if (HP >= 100f)
+            {
+                HP = 100f;
+            }
         }
 
         if (other.gameObject.CompareTag("EnemyHit"))
@@ -149,10 +143,12 @@ public class PlayerController : MonoBehaviour
 
     void GameOverPlayer()
     {
+        Cursor.lockState = CursorLockMode.Confined;
         Destroy(gameObject);
         GOP = true;
         MenuManagerScript.GameOverCanvas.SetActive(true);
-        //Particulas
+        Instantiate(Deap_ps, transform.position, transform.rotation);
         AMS.PlaySound(5);
+        
     }
 }

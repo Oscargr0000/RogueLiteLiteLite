@@ -42,11 +42,17 @@ public class Enemy : MonoBehaviour
 
         if (Type == EnemyType.rojo)
         {
-            // enemyHp == DataPersistanceHProjo + Multiplicador
+            EnemyHP = DataPersistanceScript.sharedInstance.HpRedData;
+            Damage = DataPersistanceScript.sharedInstance.DamageRedData;
+            Speed = DataPersistanceScript.sharedInstance.SpeedRedData;
+            // enemyHp = DataPersistanceHProjo + Multiplicador
         }
         else if( Type == EnemyType.lila)
         {
-            // enemyHp == DataPersistanceHPlila + Multiplicador
+            EnemyHP = DataPersistanceScript.sharedInstance.HpLilaData;
+            Damage = DataPersistanceScript.sharedInstance.DamageLilaData;
+            Speed = DataPersistanceScript.sharedInstance.SpeedLilaData;
+            // enemyHp = DataPersistanceHPlila + Multiplicador
         }
        
 
@@ -100,7 +106,7 @@ public class Enemy : MonoBehaviour
 
         if (other.gameObject.CompareTag("Shield"))
         {
-            Empuje(13f);
+            Empuje(7f);
             AMS.PlaySound(7);
         }
     }

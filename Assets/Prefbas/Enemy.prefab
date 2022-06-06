@@ -208,9 +208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8601026334437f4fb3d276b3a926822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHP: 20
-  Damage: 7
-  Speed: 8
+  EnemyHP: 0
+  Damage: 0
+  Speed: 0
   HPprobability: 0
   HpRecover: {fileID: 3339251192533962942, guid: d307d2450a5dd8d499e32b1a85db13cd, type: 3}
   EnemyAttack: {fileID: 6718032195602454833}

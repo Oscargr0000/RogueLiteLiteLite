@@ -13,6 +13,9 @@ public class MenuManager : MonoBehaviour
     private SpawnManager SpawnManagerScript;
     private FollowPlayer FollowPlayerScript;
 
+    public Image BarradeVida;
+    public float VidaMaxima = 100f;
+
     public int RoundNum = 1;
 
     public GameObject PowerUpsCanvas;
@@ -55,8 +58,8 @@ public class MenuManager : MonoBehaviour
 
         HpText.text = getHP;
         RoundText.text = getRound;
-       
 
+        BarradeVida.fillAmount = PlayerControllerScript.HP / VidaMaxima;
 
         if (SpawnManagerScript.ShowPowerUps == true)
         {
